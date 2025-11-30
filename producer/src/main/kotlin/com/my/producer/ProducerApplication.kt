@@ -13,8 +13,8 @@ class ProducerApplication {
     fun init(kafkaProducer: KafkaProducer): CommandLineRunner = CommandLineRunner {
         val resource = ClassPathResource("e-commerce-retail-data.csv")
         resource.inputStream.bufferedReader().useLines { lines ->
-            lines.drop(1).forEachIndexed { index, line ->
-                kafkaProducer.sendMessage("retail-data", index.toString(), line)
+            lines.drop(1).take(10).forEachIndexed { index, line ->
+                kafkaProducer.sendMessage("message", index.toString(), line)
             }
         }
     }

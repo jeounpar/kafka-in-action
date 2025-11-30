@@ -1,6 +1,14 @@
 spring:
   application:
     name: consumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      concurrency: 6  # 파티션 12개를 6개 스레드로 처리
+    topic:
+      message:
+        partitions: 12  # message 토픽 파티션 개수
+        replicas: 1     # replica 개수
 
 server:
   port: 8082
